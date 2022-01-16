@@ -69,7 +69,7 @@ typedef struct help
 	int data_struct;
 	char *argument;
 } help;
-extern help;
+help extern;
 
 extern int status;
 
