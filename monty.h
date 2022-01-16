@@ -1,13 +1,6 @@
 #ifndef MONTY_H
 #define MONTY_H
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <ctype.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+
 #include <stddef.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -69,7 +62,7 @@ typedef struct help
 	int data_struct;
 	char *argument;
 } help;
-help extern;
+help global;
 
 extern int status;
 
@@ -99,4 +92,3 @@ void free_stack(stack_t *stack);
 size_t print_stack(const stack_t *stack);
 
 #endif /* MONTY_H */
-
