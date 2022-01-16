@@ -1,10 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include<stddef.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include "monty.h"
 
 /**
@@ -44,7 +40,6 @@ int main(int argc, char **argv)
 	size_t buf_len = 0;
 	char *buffer = NULL;
 	char *str = NULL;
-	ssize_t n_read;
 	stack_t *stack = NULL;
 	unsigned int line_cnt = 1;
 
@@ -56,9 +51,9 @@ int main(int argc, char **argv)
 
 	if (!file)
 		file_error(argv[1]);
-	do
+
+	while (getline(&buffer, &buf_len, file) != -1)
 	{
-		n_read = getline(&buffer, &buf_len, file);
 		if (status)
 			break;
 		if (*buffer == '\n')
@@ -75,11 +70,9 @@ int main(int argc, char **argv)
 		global.argument = strtok(NULL, " \t\n");
 		opcode(&stack, str, line_cnt);
 		line_cnt++;
-	}while(n_read != -1);
-
+	}
 	free(buffer);
 	free_stack(stack);
 	fclose(file);
 	exit(status);
 }
-
